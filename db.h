@@ -10,7 +10,7 @@ struct db{
 	int ans;
 	vector<string> text;
 	vector<int> number;
-}db[20];//°æ±¾¿â
+}db[20];//ç‰ˆæœ¬åº“
 string password;
 int ku;
 void init(){
@@ -53,10 +53,86 @@ void db_find(int k,bool x,string txt,int n){
 			}
 		}
 		else{
-			for(int i=1;i<=db[i].text.size();i++){
-				
+			for(int i=1;i<=db[k].text.size();i++){
+				string flag=db[i].text[i];
+				if(flag.find(txt)<=flag.length()){
+					cout<<cnt<<"."<<flag<<endl;
+					cnt++;
+				}
 			}
 		}
 	}
+	else{
+		if(k==0){
+			for(int i=1;i<=ku;i++){
+				for(int j=1;j<=db[i].number.size();j++){
+					int flag=db[i].number[j];
+					if(flag==n){
+						cout<<cnt<<"."<<flag<<endl;
+						cnt++;
+					}
+				}
+			}
+		}
+		else{
+			for(int i=1;i<=db[k].number.size();i++){
+				string flag=db[i].number[i];
+				if(flag==n){
+					cout<<cnt<<"."<<flag<<endl;
+					cnt++;
+				}
+			}
+		}
+	}
+}
+void str_del(string str){
+	for(int i=db[k].text.begin();i<=db[k].text.end;i++){
+		if(db[k].text.find(str)){
+			auto f=db[k].text.erase(i);
+		}
+	}
+	return;
+}
+void add_to(){
+	ku++;
+	for(int i=1;i<=db[ku-1].text.size();i++){
+		db[ku].text.push_back(db[ku-1].text[i]);
+	}
+	for(int i=1;i<=db[ku-1].number.size();i++){
+		db[ku].number.push_back(db[ku-1].number[i]);
+	}
+	return;
+}
+void sub_to(){
+	db[ku].text.clear();
+	db[ku].number.clear();
+	ku--;
+}
+void number_add(int a){
+	db[ku].ans++;
+	db[ku].number.push_back(a);
+}
+void str_add(string a){
+	db[ku].ans++;
+	db[ku].text.push_back(a);
+}
+void end(){
+	freopen("db.in","w",stdout);
+	for(int i=0;i<password.length();i++){
+		password[i]-+=2;
+	}
+	cout<<ku<<password<<endl;
+	for(int i=1;i<=ku;i++){
+		cout<<db[i].ans
+		for(int j=1;j<=db[i].ans;j++){
+			if(j<=db[i].text.size()){
+				cout<<1<<endl<<db[i].text[j]<<endl;
+			}
+			else{
+				cout<<2<<endl<<db[i].number[j]<<endl;
+			}
+		}
+	}
+	freopen("CON","w",stdout);
 }
 #endif
